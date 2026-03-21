@@ -2,12 +2,11 @@
   "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
   "version": 1,
   "cli": {
-    "packageManager": "npm",
-    "analytics": "791b62cf-e1a1-49c0-9568-34e7234ec462"
+    "packageManager": "npm"
   },
   "newProjectRoot": "projects",
   "projects": {
-    "angular-hola-mundo": {
+    "lugare-bonitos": {
       "projectType": "application",
       "schematics": {},
       "root": "",
@@ -27,15 +26,7 @@
             ],
             "styles": [
               "src/styles.css"
-            ],
-            "server": "src/main.server.ts",
-            "outputMode": "server",
-            "security": {
-              "allowedHosts": []
-            },
-            "ssr": {
-              "entry": "src/server.ts"
-            }
+            ]
           },
           "configurations": {
             "production": {
@@ -65,10 +56,10 @@
           "builder": "@angular/build:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "angular-hola-mundo:build:production"
+              "buildTarget": "lugare-bonitos:build:production"
             },
             "development": {
-              "buildTarget": "angular-hola-mundo:build:development"
+              "buildTarget": "lugare-bonitos:build:development"
             }
           },
           "defaultConfiguration": "development"
