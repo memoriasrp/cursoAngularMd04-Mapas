@@ -12,16 +12,17 @@ export class FormDestinoViaje {
   @Output() onItemAdded = new EventEmitter<DestinoViajes>();
   fg: FormGroup;
   mensajeError = '';
+  minLongitud = 5;
 
   constructor(fb: FormBuilder) {
     this.onItemAdded = new EventEmitter();
     this.fg = fb.group({
-      nombre: ['', Validators.required],
-      url: ['', Validators.required]
+      nombre: ['', [Validators.required, this.validarNombre.bind(this)]],
+      url: ['', [Validators.required, this.validarUrl.bind(this)]]
     });
 
     // es un ejemplo que registrar todos los cambios que se realizan en el formulario
-    this.fg.valueChanges.subscribe((form: any) => { console.log('this->' + form) });
+    //this.fg.valueChanges.subscribe((form: any) => { console.log('this->' + form) });
   }
 
   guardar(): boolean {
@@ -43,4 +44,25 @@ export class FormDestinoViaje {
 
     return false;
   }
+
+  validarNombre(control: FormControl) {
+    const valor = control.value;
+    if (valor.length < this.minLongitud)
+      return { minlength: true };
+    return null; // válido
+  }
+  validarUrl(control: FormControl) {
+    const valor = control.value;
+
+    if (!valor) {
+      return { required: true };
+    }
+    const patron = /^https?:\/\/.+/;
+    if (!patron.test(valor)) {
+      return { pattern: true };
+    }
+
+    return null; // válido
+  }
+
 }
