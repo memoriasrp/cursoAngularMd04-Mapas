@@ -46,10 +46,18 @@ export class FormDestinoViaje {
   }
 
   validarNombre(control: FormControl) {
-    const valor = control.value;
-    if (valor.length < this.minLongitud)
+    const valor = control.value ?? ''; // si es null, lo convierte en ''
+
+    if (!valor.trim()) {
+      return { required: true };
+    }
+
+    if (valor.trim().length < 5) {
       return { minlength: true };
-    return null; // válido
+    }
+
+    return null;
+
   }
   validarUrl(control: FormControl) {
     const valor = control.value;
