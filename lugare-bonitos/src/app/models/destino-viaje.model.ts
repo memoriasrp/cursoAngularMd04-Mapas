@@ -1,9 +1,15 @@
 export class DestinoViajes {
-    nombre: string;
-    imagenUrl: String;
-
-    constructor(n: string, u: string) {
-        this.nombre = n;
-        this.imagenUrl = u;
+    private selected: boolean;
+    public servicios: string[];
+    constructor(public nombre: string, public imagenUrl: string) {
+        this.selected = false;
+        this.servicios = ['pileta', 'desayuno'];
     }
+    isSelected(): boolean {
+        return this.selected;
+    }
+    setSelected(v: boolean) {
+        this.selected = v;
+    }
+
 }

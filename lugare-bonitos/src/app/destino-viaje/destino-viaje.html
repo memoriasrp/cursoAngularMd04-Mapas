@@ -2,13 +2,31 @@
     <div class="card-img">
         <img [src]="destino.imagenUrl" alt="">
         <span>
-            <h4>{{destino.nombre}}</h4>
+            <h4>{{position}}</h4>
         </span>
     </div>
     <div class="card-desc">
         <h3>{{destino.nombre}}</h3>
-        <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Laboriosam, voluptatum! Dolor quo, perspiciatis
-            voluptas totam</p>
-        <a href="#" class="btn-card">Read</a>
+        <p>servicios</p>
+        <ul>
+            @for (s of destino.servicios; track s) {
+            <li><span>
+                    @switch(s){
+                    @case("desayuno"){
+                    <i style="color:brown">{{s}}</i>
+                    }
+                    @default{
+                    <p>{{s}}</p>
+                    }
+                    }
+                </span></li>
+            }
+
+        </ul>
+        <a href="#" class="btn-card" (click)="ir()">Ir!</a>
+        @if(destino.isSelected()){
+        <span ngNonBindable>{{**}}</span>
+        }
+
     </div>
 </div>

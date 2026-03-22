@@ -36,8 +36,8 @@
     <hr class="mb-5">
 
     <div class="row row-flex">
-        @for (d of destinos; track d) {
-        <app-destino-viaje [destino]="d"></app-destino-viaje>
+        @for (d of destinos; track d; let i=$index) {
+        <app-destino-viaje [destino]="d" [position]="i+1" (clicked)="elegido($event)"></app-destino-viaje>
         }
 
     </div>

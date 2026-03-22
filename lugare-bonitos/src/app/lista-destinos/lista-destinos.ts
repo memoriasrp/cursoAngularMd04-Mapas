@@ -17,6 +17,7 @@ export class ListaDestinos {
   guardar(nombreInput: HTMLInputElement, urlInput: HTMLInputElement): boolean {
     const nombre = nombreInput.value;
     const url = urlInput.value;
+    console.log("sdfsfs" + urlInput.value);
     if (!nombre || !url) {
       this.mensajeError = 'Falta completar todos los campos';
 
@@ -35,5 +36,10 @@ export class ListaDestinos {
     nombreInput.value = '';
 
     return false;
+  }
+  elegido(d: DestinoViajes) {
+    this.destinos.forEach(function (x) { x.setSelected(false); })
+    d.setSelected(true);
+
   }
 }
