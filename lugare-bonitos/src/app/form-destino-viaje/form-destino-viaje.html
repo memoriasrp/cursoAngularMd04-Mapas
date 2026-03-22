@@ -1,0 +1,21 @@
+<form [formGroup]="fg" (ngSubmit)="guardar()">
+    <div class="form-group">
+        <label for="nombre">Nombre</label>
+        <input type="text" class="form-control" id="nombre" placeholder="Ingresar nombre..." formControlName="nombre">
+    </div>
+
+    <div class="form-group">
+        <label for="url">Imagen URL</label>
+        <input type="text" id="url" class="form-control" formControlName="url" placeholder="https://picsum.photos/id/2">
+        <small class="text-muted">Ejemplo: https://picsum.photos/id/10</small>
+
+    </div>
+
+    <button type="submit" class="btn btn-primary">Guardar!</button>
+
+    @if (mensajeError) {
+    <div class="alert alert-danger mt-2">
+        {{ mensajeError }}
+    </div>
+    }
+</form>
