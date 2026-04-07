@@ -3,11 +3,12 @@ import { RouterLink } from '@angular/router';
 import { Store } from '@ngrx/store';
 
 import { DestinoViajes } from '../models/destino-viaje.model';
-import { 
-  votarUp, 
-  votarDown, 
-  elegidoFavorito, 
-  eliminarDestino 
+import {
+  votarUp,
+  votarDown,
+  elegidoFavorito,
+  eliminarDestino,
+  resetVote
 } from '../store/destinos/destinos.actions';
 
 @Component({
@@ -25,7 +26,7 @@ export class DestinoViaje {
 
   @HostBinding('attr.class') cssClass = 'col-md-4';
 
-  constructor(private store: Store) {}
+  constructor(private store: Store) { }
 
   //  Marcar como favorito
   ir() {
@@ -47,6 +48,11 @@ export class DestinoViaje {
   // Votar abajo
   voteDown() {
     this.store.dispatch(votarDown({ destino: this.destino }));
+    return false;
+  }
+
+  resetVote() {
+    this.store.dispatch(resetVote({ destino: this.destino }));
     return false;
   }
 }

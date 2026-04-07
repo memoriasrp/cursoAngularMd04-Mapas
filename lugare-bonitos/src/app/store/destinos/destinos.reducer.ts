@@ -1,5 +1,5 @@
 import { createReducer, on } from '@ngrx/store';
-import { nuevoDestino, elegidoFavorito, eliminarDestino, votarUp, votarDown } from './destinos.actions';
+import { nuevoDestino, elegidoFavorito, eliminarDestino, votarUp, votarDown, resetVote } from './destinos.actions';
 import { DestinoViajes } from '../../models/destino-viaje.model';
 import { DestinosViajesState, initializeDestinosViajesState } from './destinos.state';
 
@@ -34,35 +34,50 @@ export const reducerDestinosViajes = createReducer(
   })),
 
   // VOTAR UP
-        on(votarUp, (state, { destino }) => ({
-        ...state,
-        items: state.items.map(d =>
-            d.nombre === destino.nombre
-            ? new DestinoViajes(
-                d.nombre,
-                d.imagenUrl,
-                d.servicios,
-                (d.votos ?? 0) + 1,
-                d.selected
-                )
-            : d
+  on(votarUp, (state, { destino }) => ({
+    ...state,
+    items: state.items.map(d =>
+      d.nombre === destino.nombre
+        ? new DestinoViajes(
+          d.nombre,
+          d.imagenUrl,
+          d.servicios,
+          (d.votos ?? 0) + 1,
+          d.selected
         )
-        })),
+        : d
+    )
+  })),
 
-// VOTAR DOWN
-        on(votarDown, (state, { destino }) => ({
-        ...state,
-        items: state.items.map(d =>
-            d.nombre === destino.nombre
-            ? new DestinoViajes(
-                d.nombre,
-                d.imagenUrl,
-                d.servicios,
-                Math.max((d.votos ?? 0) - 1, 0),
-                d.selected
-                )
-            : d
+  // VOTAR DOWN
+  on(votarDown, (state, { destino }) => ({
+    ...state,
+    items: state.items.map(d =>
+      d.nombre === destino.nombre
+        ? new DestinoViajes(
+          d.nombre,
+          d.imagenUrl,
+          d.servicios,
+          Math.max((d.votos ?? 0) - 1, 0),
+          d.selected
         )
-        })),
+        : d
+    )
+  })),
+
+  on(resetVote, (state, { destino }) => ({
+    ...state,
+    items: state.items.map(d =>
+      d.nombre === destino.nombre
+        ? new DestinoViajes(
+          d.nombre,
+          d.imagenUrl,
+          d.servicios,
+          0,
+          d.selected
+        )
+        : d
+    )
+  })),
 
 );

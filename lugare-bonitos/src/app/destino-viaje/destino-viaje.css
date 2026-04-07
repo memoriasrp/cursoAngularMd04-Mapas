@@ -41,13 +41,14 @@
     transition: transform 0.2s ease, color 0.2s ease;
 }
 
-.votes a:hover {
-    transform: scale(1.2);
-    color: #1976d2;
+.acciones {
+    display: flex;
+    align-items: center;
 }
 
 .vote-count {
     font-weight: bold;
     font-size: 18px;
     color: #333;
+    margin-left: auto;
 }

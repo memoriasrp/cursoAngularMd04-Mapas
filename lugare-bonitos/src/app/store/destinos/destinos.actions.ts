@@ -25,3 +25,8 @@ export const votarDown = createAction(
   '[Destinos Viajes] Votar Down',
   props<{ destino: DestinoViajes }>()
 );
+
+export const resetVote = createAction(
+  '[Destinos Viajes] Reset Vote',
+  props<{ destino: DestinoViajes }>()
+);
