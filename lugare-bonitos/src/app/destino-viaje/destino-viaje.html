@@ -23,7 +23,16 @@
             }
 
         </ul>
-        <a href="#" class="btn-card" (click)="ir()">Ir!</a>
+        <button class="btn-card" (click)="ir()">Ir!</button>
+        <button class="btn-card btn-delete" (click)="eliminar()">
+            <span class="material-icons">delete</span>
+        </button>
+
+
+
+
+
+
         @if(destino.isSelected()){
         <span ngNonBindable>{{**}}</span>
         }

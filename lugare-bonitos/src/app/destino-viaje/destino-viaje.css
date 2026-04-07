@@ -1,0 +1,29 @@
+/* --- Ocultar el botón por defecto --- */
+.btn-delete {
+    opacity: 0;
+    pointer-events: none;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 4px;
+    transition: opacity 0.25s ease, transform 0.2s ease, color 0.2s ease;
+}
+
+/* --- Mostrar el botón al pasar el mouse por la tarjeta --- */
+.card-content:hover .btn-delete {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+/* --- Estilo del ícono Material --- */
+.btn-delete .material-icons {
+    font-size: 22px;
+    color: #c0392b;
+    transition: transform 0.2s ease, color 0.2s ease;
+}
+
+/* --- Efecto hover del ícono --- */
+.btn-delete:hover .material-icons {
+    transform: scale(1.2);
+    color: #e74c3c;
+}

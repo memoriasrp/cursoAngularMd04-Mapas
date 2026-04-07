@@ -26,9 +26,21 @@ export class DestinosApiClient {
     }
 
     elegir(d: DestinoViajes) {
+        /*
         this.destinos.forEach(x => x.setSelected(false));
         d.setSelected(true);
         this.current.next(d);
+        */
+       this.destinos = this.destinos.map(x => {
+        const nuevo = new DestinoViajes(x.nombre, x.imagenUrl);
+        nuevo.setSelected(x === d);
+        return nuevo;
+  });
+
+    }
+
+    eliminar(d: DestinoViajes) {
+    this.destinos = this.destinos.filter(x => x !== d);
     }
 
     subscribeOnChange(fn: any) {

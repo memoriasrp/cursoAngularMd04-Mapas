@@ -13,12 +13,17 @@ export class DestinoViaje {
 
   @Input() destino!: DestinoViajes;
   @Input() position!: number;
+  @Output() onEliminar = new EventEmitter<DestinoViajes>();
+
   @HostBinding('attr.class') cssClass = 'col-md-4'
 
   @Output() clicked = new EventEmitter<DestinoViajes>();
 
-  ir(): boolean {
+  ir() {
     this.clicked.emit(this.destino);
-    return false;
   }
+  eliminar() {
+    this.onEliminar.emit(this.destino);
+  }
+
 }
