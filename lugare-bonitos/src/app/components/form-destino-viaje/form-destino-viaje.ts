@@ -57,7 +57,7 @@ export class FormDestinoViaje {
       return false;
     }
     const { nombre, url } = this.fg.value;
-    const nuevoDestino = new DestinoViajes(nombre, url + "/380/230");
+    const nuevoDestino = new DestinoViajes(nombre, url + "/380/230", 0);
     // 1. Guardamos en el servicio (que puede estar usando useClass para LocalStorage)
     this.api.add(nuevoDestino);
 

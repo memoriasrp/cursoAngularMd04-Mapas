@@ -18,7 +18,7 @@ export class DestinosApiClientLocalStorage extends DestinosApiClient {
         if (db) {
             // Cargamos lo que había guardado
             const data = JSON.parse(db);
-            this.destinos = data.map((d: any) => new DestinoViajes(d.nombre, d.imagenUrl));
+            this.destinos = data.map((d: any) => new DestinoViajes(d.nombre, d.imagenUrl, d.id));
         }
     }
 
@@ -32,10 +32,10 @@ export class DestinosApiClientLocalStorage extends DestinosApiClient {
                     const d = new DestinoViajes(
                         item.nombre,
                         item.imagenUrl,
-                        item.votos || 0
-                    );
+                        item.id,
+                        item.votos || 0,
 
-                    // Si en el JSON venía que estaba seleccionado, lo marcamos
+                    );
                     if (item.selected) { d.setSelected(true); }
 
                     return d;
@@ -61,17 +61,9 @@ export class DestinosApiClientLocalStorage extends DestinosApiClient {
     // destinos-api-client-storage.ts
 
     override eliminar(d: DestinoViajes) {
-        // 1. Lógica local (opcional, limpia el array en memoria)
         super.eliminar(d);
-
-        // 2. Limpiar LocalStorage
         localStorage.setItem('destinos', JSON.stringify(this.destinos));
-
-        // 3. ¡LO NUEVO! Petición al Servidor Express
-        const nombreCodificado = encodeURIComponent(d.nombre);
-        const url = `${this.config.baseUrl}/destinos/${nombreCodificado}`;
-
-        // Importante: El .subscribe() es lo que hace que la petición se envíe
+        const url = `${this.config.baseUrl}/destinos/${d.id}`;
         this.http.delete(url).subscribe({
             next: (res) => console.log('Borrado del servidor:', res),
             error: (err) => console.error('Error al borrar en servidor:', err)
@@ -82,7 +74,7 @@ export class DestinosApiClientLocalStorage extends DestinosApiClient {
         // Prioridad al valor calculado manualmente para evitar desfases
         const votosASincronizar = votosManuales !== undefined ? votosManuales : d.votos;
 
-        const url = `${this.config.baseUrl}/destinos/${encodeURIComponent(d.nombre)}`;
+        const url = `${this.config.baseUrl}/destinos/${d.id}`;
 
         this.http.patch(url, { votos: votosASincronizar }).subscribe({
             next: (res) => console.log('Confirmado por servidor:', res),

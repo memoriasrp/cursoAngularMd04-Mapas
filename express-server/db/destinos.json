@@ -1,0 +1,57 @@
+[
+  {
+    "nombre": "Alemania",
+    "imagenUrl": "https://picsum.photos/id/852/380/230",
+    "servicios": [
+      "pileta",
+      "desayuno"
+    ],
+    "selected": false,
+    "votos": 7,
+    "id": 1
+  },
+  {
+    "nombre": "Chile",
+    "imagenUrl": "https://picsum.photos/id/1032/380/230",
+    "servicios": [
+      "pileta",
+      "desayuno"
+    ],
+    "selected": false,
+    "votos": 4,
+    "id": 2
+  },
+  {
+    "nombre": "China",
+    "imagenUrl": "https://picsum.photos/id/1074/380/230",
+    "servicios": [
+      "pileta",
+      "desayuno"
+    ],
+    "selected": false,
+    "votos": 4,
+    "id": 3
+  },
+  {
+    "nombre": "España",
+    "imagenUrl": "https://picsum.photos/id/852/380/230",
+    "id": 1775926710816,
+    "votos": 0,
+    "servicios": [
+      "pileta",
+      "desayuno"
+    ],
+    "selected": false
+  },
+  {
+    "nombre": "Panamá",
+    "imagenUrl": "https://picsum.photos/id/159/380/230",
+    "id": 1775926737396,
+    "votos": 0,
+    "servicios": [
+      "pileta",
+      "desayuno"
+    ],
+    "selected": false
+  }
+]

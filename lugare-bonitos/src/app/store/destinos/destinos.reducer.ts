@@ -41,6 +41,7 @@ export const reducerDestinosViajes = createReducer(
         ? new DestinoViajes(
           d.nombre,
           d.imagenUrl,
+          d.id,
           (d.votos ?? 0) + 1, // Ahora es el 3er argumento
           d.servicios,        // 4to
           d.selected          // 5to
@@ -56,6 +57,7 @@ export const reducerDestinosViajes = createReducer(
         ? new DestinoViajes(
           d.nombre,
           d.imagenUrl,
+          d.id,
           Math.max((d.votos ?? 0) - 1, 0),
           d.servicios,
           d.selected
@@ -71,6 +73,7 @@ export const reducerDestinosViajes = createReducer(
         ? new DestinoViajes(
           d.nombre,
           d.imagenUrl,
+          d.id,
           0,
           d.servicios,
           d.selected

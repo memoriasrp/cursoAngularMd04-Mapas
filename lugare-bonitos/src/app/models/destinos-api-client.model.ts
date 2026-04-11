@@ -27,7 +27,7 @@ export class DestinosApiClient {
 
     elegir(d: DestinoViajes) {
         this.destinos = this.destinos.map(x => {
-            const nuevo = new DestinoViajes(x.nombre, x.imagenUrl);
+            const nuevo = new DestinoViajes(x.nombre, x.imagenUrl, x.id);
             nuevo.setSelected(x === d);
             return nuevo;
         });
@@ -35,9 +35,6 @@ export class DestinosApiClient {
     }
 
     eliminar(d: DestinoViajes) {
-        this.destinos = this.destinos.filter(x => x.nombre !== d.nombre);
-        // GUARDAMOS EL CAMBIO: Si no haces esta línea, el borrado no persiste
-        localStorage.setItem('destinos', JSON.stringify(this.destinos));
     }
 
     subscribeOnChange(fn: any) {
