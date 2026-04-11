@@ -19,7 +19,7 @@ export const reducerDestinosViajes = createReducer(
     ...state,
     items: state.items.map(x => {
       // IMPORTANTE: Pasamos los votos actuales para no resetearlos a 0
-      const nuevo = new DestinoViajes(x.nombre, x.imagenUrl, x.votos);
+      const nuevo = new DestinoViajes(x.nombre, x.imagenUrl, x.id, x.votos);
       nuevo.setSelected(x.nombre === destino.nombre);
       return nuevo;
     }),

@@ -73,7 +73,6 @@ export class DestinosApiClientLocalStorage extends DestinosApiClient {
     override actualizarVotos(d: DestinoViajes, votosManuales?: number): void {
         // Prioridad al valor calculado manualmente para evitar desfases
         const votosASincronizar = votosManuales !== undefined ? votosManuales : d.votos;
-
         const url = `${this.config.baseUrl}/destinos/${d.id}`;
 
         this.http.patch(url, { votos: votosASincronizar }).subscribe({

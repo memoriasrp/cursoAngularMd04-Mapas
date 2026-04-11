@@ -29,7 +29,7 @@
       "desayuno"
     ],
     "selected": false,
-    "votos": 4,
+    "votos": 0,
     "id": 3
   },
   {
@@ -47,6 +47,28 @@
     "nombre": "Panamá",
     "imagenUrl": "https://picsum.photos/id/159/380/230",
     "id": 1775926737396,
+    "votos": 0,
+    "servicios": [
+      "pileta",
+      "desayuno"
+    ],
+    "selected": false
+  },
+  {
+    "nombre": "china",
+    "imagenUrl": "https://picsum.photos/id/954/380/230",
+    "id": 1775927117488,
+    "votos": 0,
+    "servicios": [
+      "pileta",
+      "desayuno"
+    ],
+    "selected": false
+  },
+  {
+    "nombre": "groelandia",
+    "imagenUrl": "https://picsum.photos/id/753/380/230",
+    "id": 1775938517658,
     "votos": 0,
     "servicios": [
       "pileta",

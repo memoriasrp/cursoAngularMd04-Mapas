@@ -18,7 +18,6 @@ export class ReservasListado implements OnInit {
     this.api.getAllReservas().subscribe({
       next: (data: any) => {
         this.misReservas = data;
-        console.log('Reservas recibidas:', data);
       },
       error: (err) => console.error('Error al traer reservas', err)
     });

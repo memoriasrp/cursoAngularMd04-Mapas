@@ -24,12 +24,9 @@ export class ListaDestinos {
   constructor(private store: Store<{ destinos: DestinosViajesState }>) {
     // 1. Nos suscribimos al flujo de datos (ahora asíncrono desde Express)
     this.api.getAll().subscribe((datos: DestinoViajes[]) => {
-
       // 2. Solo cuando los datos llegan del servidor, los mandamos al Store
       if (datos && datos.length > 0) {
         datos.forEach(d => {
-          // Importante: Si 'd' viene de la API como objeto plano, 
-          // podrías necesitar: d = new DestinoViajes(d.nombre, d.imagenUrl);
           this.store.dispatch(nuevoDestino({ destino: d }));
         });
       }

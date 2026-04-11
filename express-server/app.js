@@ -16,7 +16,6 @@ app.get('/api/destinos', (req, res) => {
         const dbPath = path.join(__dirname, 'db', 'destinos.json');
         const data = fs.readFileSync(dbPath, 'utf8');
         const db = JSON.parse(data);
-        console.log(data);
         // Enviamos el array directamente
         res.json(db);
     } catch (error) {
@@ -91,7 +90,6 @@ app.patch('/api/destinos/:id', (req, res) => {
         if (destino) {
             destino.votos = votos;
             fs.writeFileSync(destinosPath, JSON.stringify(listaDestinos, null, 2));
-            console.log(`Votos actualizados para ${idAActualizar}: ${votos}`);
             res.json(destino);
         } else {
             res.status(404).json({ message: 'Destino no encontrado' });
