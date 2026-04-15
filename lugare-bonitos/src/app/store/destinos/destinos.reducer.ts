@@ -1,5 +1,5 @@
 import { createReducer, on } from '@ngrx/store';
-import { nuevoDestino, elegidoFavorito, eliminarDestino, votarUp, votarDown, resetVote } from './destinos.actions';
+import { nuevoDestino, elegidoFavorito, eliminarDestino, votarUp, votarDown, resetVote, cargarDestinos } from './destinos.actions';
 import { DestinoViajes } from '../../models/destino-viaje.model';
 import { DestinosViajesState, initializeDestinosViajesState } from './destinos.state';
 
@@ -9,11 +9,22 @@ export const reducerDestinosViajes = createReducer(
   initialState,
 
   // NUEVO DESTINO
-  on(nuevoDestino, (state, { destino }) => ({
-    ...state,
-    items: [...state.items, destino]
-  })),
+  // En destinos.reducer.ts
+  on(nuevoDestino, (state, { destino }) => {
+    // Solo buscamos por nombre para "unificar" el temporal con el real
+    const indice = state.items.findIndex(x => x.nombre === destino.nombre);
 
+    if (indice !== -1) {
+      // Si ya existe el nombre, pisamos el viejo con el nuevo 
+      // (esto cambia el ID temporal por el real sin duplicar)
+      const nuevaLista = [...state.items];
+      nuevaLista[indice] = destino;
+      return { ...state, items: nuevaLista };
+    }
+
+    // Si el nombre no existe, es un destino totalmente nuevo
+    return { ...state, items: [...state.items, destino] };
+  }),
   // ELEGIDO FAVORITO (Corregido para no perder votos)
   on(elegidoFavorito, (state, { destino }) => ({
     ...state,
@@ -25,19 +36,18 @@ export const reducerDestinosViajes = createReducer(
     }),
     favorito: destino
   })),
-
   // ELIMINAR DESTINO
   on(eliminarDestino, (state, { destino }) => ({
     ...state,
-    items: state.items.filter(x => x !== destino),
-    favorito: state.favorito === destino ? null : state.favorito
+    items: state.items.filter(x => x.id !== destino.id), // Comparamos IDs
+    favorito: state.favorito?.id === destino.id ? null : state.favorito
   })),
 
   // VOTAR UP
   on(votarUp, (state, { destino }) => ({
     ...state,
     items: state.items.map(d =>
-      d.nombre === destino.nombre
+      d.id === destino.id
         ? new DestinoViajes(
           d.nombre,
           d.imagenUrl,
@@ -46,14 +56,13 @@ export const reducerDestinosViajes = createReducer(
           d.servicios,        // 4to
           d.selected          // 5to
         )
-        : d
-    )
+        : d)
   })),
   // VOTAR DOWN
   on(votarDown, (state, { destino }) => ({
     ...state,
     items: state.items.map(d =>
-      d.nombre === destino.nombre
+      d.id === destino.id
         ? new DestinoViajes(
           d.nombre,
           d.imagenUrl,
@@ -65,11 +74,10 @@ export const reducerDestinosViajes = createReducer(
         : d
     )
   })),
-
   on(resetVote, (state, { destino }) => ({
     ...state,
     items: state.items.map(d =>
-      d.nombre === destino.nombre
+      d.id === destino.id
         ? new DestinoViajes(
           d.nombre,
           d.imagenUrl,
@@ -81,5 +89,9 @@ export const reducerDestinosViajes = createReducer(
         : d
     )
   })),
-
+  // Al final de tu createReducer...
+  on(cargarDestinos, (state, { destinos }) => ({
+    ...state,
+    items: [...destinos] // REEMPLAZA, no acumula. Esto quita el error de duplicados.
+  })),
 );

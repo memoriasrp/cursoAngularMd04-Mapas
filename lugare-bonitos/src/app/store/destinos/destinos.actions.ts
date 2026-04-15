@@ -5,6 +5,10 @@ export const nuevoDestino = createAction(
   '[Destinos Viajes] Nuevo',
   props<{ destino: DestinoViajes }>()
 );
+export const cargarDestinos = createAction(
+  '[Destinos Viajes] Cargar',
+  props<{ destinos: DestinoViajes[] }>()
+);
 
 export const elegidoFavorito = createAction(
   '[Destinos Viajes] Favorito',

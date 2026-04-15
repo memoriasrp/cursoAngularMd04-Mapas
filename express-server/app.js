@@ -1,4 +1,5 @@
 const express = require('express');
+const bodyParser = require('body-parser');
 const cors = require('cors'); // No olvides instalarlo: npm install cors
 const app = express();
 const port = 3000;
@@ -7,7 +8,8 @@ const fs = require('fs');
 // Middleware
 app.use(cors());          // Permite que Angular (puerto 4200) se conecte
 app.use(express.json());  // Permite que tu servidor entienda el JSON que envía Angular
-
+// --- CONFIGURACIÓN DE MIDDLEWARES ---
+app.use(express.json());
 const destinosPath = path.join(__dirname, 'db', 'destinos.json');
 // RUTAS
 // 1. Obtener todos los destinos
@@ -19,7 +21,7 @@ app.get('/api/destinos', (req, res) => {
         // Enviamos el array directamente
         res.json(db);
     } catch (error) {
-        console.error("Error:", error);
+        console.warn("Error:", error);
         res.status(500).json({ error: "No se pudo leer el archivo" });
     }
 });
@@ -43,7 +45,17 @@ app.post('/api/destinos', (req, res) => {
         if (nuevo.votos === undefined) {
             nuevo.votos = 0;
         }
-        nuevo.id = Date.now();
+        // Buscamos si ya existe uno igual por nombre (para evitar que el bucle de sincronización duplique)
+        const existe = listaDestinos.find(d => d.nombre === nuevo.nombre);
+        if (existe) {
+            return res.status(400).json({ error: "El destino ya existe" });
+        }
+
+        if (!nuevo.id || nuevo.id > 1000000000000) {
+            // Si la lista está vacía, el max da -Infinity, por eso usamos Math.max con 0
+            const maxId = listaDestinos.length > 0 ? Math.max(...listaDestinos.map(d => d.id)) : 0;
+            nuevo.id = maxId + 1;
+        }
         listaDestinos.push(nuevo);
         fs.writeFileSync(destinosPath, JSON.stringify(listaDestinos, null, 2));
         res.status(201).json(nuevo);
@@ -60,11 +72,11 @@ app.delete('/api/destinos/:id', (req, res) => {
     const idAEliminar = parseInt(req.params.id); // Los params llegan como string
     try {
         let listaDestinos = JSON.parse(fs.readFileSync(destinosPath, 'utf8'));
-        const inicial = lista.length;
-        lista = lista.filter(d => d.id !== idAEliminar);
+        const inicial = listaDestinos.length;
+        listaDestinos = listaDestinos.filter(d => d.id !== idAEliminar);
 
-        if (lista.length < inicial) {
-            fs.writeFileSync(destinosPath, JSON.stringify(lista, null, 2));
+        if (listaDestinos.length < inicial) {
+            fs.writeFileSync(destinosPath, JSON.stringify(listaDestinos, null, 2));
             res.status(200).json({ message: 'Eliminado con éxito' });
         } else {
             res.status(404).json({ message: 'Destino no encontrado en el archivo' });

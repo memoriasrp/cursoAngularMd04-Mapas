@@ -17,7 +17,7 @@
     <hr class="mb-5">
 
     <div class="row row-flex">
-        @for (d of destinos$ | async; track d; let i = $index) {
+        @for (d of destinos$ | async; track d.id; let i = $index) {
         <app-destino-viaje [destino]="d" [position]="i + 1" (onItemDeleted)="eliminarDestino($event)">
         </app-destino-viaje>
 
@@ -33,7 +33,7 @@
         <ul>
 
         </ul>
-        @for (u of update; track u) {
+        @for (u of update; track $index) {
         <li>{{u}}</li>
         }
 

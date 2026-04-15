@@ -2,7 +2,7 @@ import { Component, inject } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable, of } from 'rxjs';
 import { DestinoViajes } from '../../models/destino-viaje.model';
-import { nuevoDestino, elegidoFavorito, eliminarDestino } from '../../store/destinos/destinos.actions';
+import { nuevoDestino, elegidoFavorito, eliminarDestino, cargarDestinos } from '../../store/destinos/destinos.actions';
 import { DestinosViajesState } from '../../store/destinos/destinos.state';
 import { AsyncPipe, CommonModule } from '@angular/common';
 import { FormDestinoViaje } from '../form-destino-viaje/form-destino-viaje';
@@ -26,9 +26,7 @@ export class ListaDestinos {
     this.api.getAll().subscribe((datos: DestinoViajes[]) => {
       // 2. Solo cuando los datos llegan del servidor, los mandamos al Store
       if (datos && datos.length > 0) {
-        datos.forEach(d => {
-          this.store.dispatch(nuevoDestino({ destino: d }));
-        });
+        this.store.dispatch(cargarDestinos({ destinos: datos }));
       }
     });
 
@@ -39,7 +37,11 @@ export class ListaDestinos {
     this.store.select(state => state.destinos.favorito)
       .subscribe(d => {
         if (d) {
-          this.update.push('Se eligió a ' + d.nombre);
+          const nuevoMensaje = 'Se eligió a ' + d.nombre;
+          // Solo agregamos si el último mensaje no es idéntico
+          if (this.update[this.update.length - 1] !== nuevoMensaje) {
+            this.update.push(nuevoMensaje);
+          }
         }
       });
   }

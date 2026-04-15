@@ -1,79 +1,86 @@
 [
   {
-    "nombre": "Alemania",
-    "imagenUrl": "https://picsum.photos/id/852/380/230",
-    "servicios": [
-      "pileta",
-      "desayuno"
-    ],
-    "selected": false,
-    "votos": 7,
-    "id": 1
-  },
-  {
-    "nombre": "Chile",
-    "imagenUrl": "https://picsum.photos/id/1032/380/230",
-    "servicios": [
-      "pileta",
-      "desayuno"
-    ],
-    "selected": false,
-    "votos": 4,
-    "id": 2
-  },
-  {
-    "nombre": "China",
-    "imagenUrl": "https://picsum.photos/id/1074/380/230",
-    "servicios": [
-      "pileta",
-      "desayuno"
-    ],
-    "selected": false,
+    "id": 1,
+    "nombre": "pachamama",
+    "imagenUrl": "https://picsum.photos/id/10/380/230",
     "votos": 0,
-    "id": 3
+    "sincronizado": false
   },
   {
-    "nombre": "España",
-    "imagenUrl": "https://picsum.photos/id/852/380/230",
-    "id": 1775926710816,
+    "id": 2,
+    "nombre": "maestro",
+    "imagenUrl": "https://picsum.photos/id/456/380/230",
     "votos": 0,
-    "servicios": [
-      "pileta",
-      "desayuno"
-    ],
-    "selected": false
+    "sincronizado": false
   },
   {
-    "nombre": "Panamá",
-    "imagenUrl": "https://picsum.photos/id/159/380/230",
-    "id": 1775926737396,
+    "id": 3,
+    "nombre": "caramadunfga",
+    "imagenUrl": "https://picsum.photos/id/652/380/230",
     "votos": 0,
-    "servicios": [
-      "pileta",
-      "desayuno"
-    ],
-    "selected": false
+    "sincronizado": false
   },
   {
-    "nombre": "china",
+    "id": 4,
+    "nombre": "arequipa",
+    "imagenUrl": "https://picsum.photos/id/147/380/230",
+    "votos": 0,
+    "sincronizado": false
+  },
+  {
+    "id": 5,
+    "nombre": "beluga",
+    "imagenUrl": "https://picsum.photos/id/258/380/230",
+    "votos": 0,
+    "sincronizado": false
+  },
+  {
+    "id": 6,
+    "nombre": "periquto",
     "imagenUrl": "https://picsum.photos/id/954/380/230",
-    "id": 1775927117488,
     "votos": 0,
-    "servicios": [
-      "pileta",
-      "desayuno"
-    ],
-    "selected": false
+    "sincronizado": false
   },
   {
-    "nombre": "groelandia",
-    "imagenUrl": "https://picsum.photos/id/753/380/230",
-    "id": 1775938517658,
+    "id": 7,
+    "nombre": "fido didoi",
+    "imagenUrl": "https://picsum.photos/id/856/380/230",
     "votos": 0,
-    "servicios": [
-      "pileta",
-      "desayuno"
-    ],
-    "selected": false
+    "sincronizado": false
+  },
+  {
+    "id": 8,
+    "nombre": "test varios",
+    "imagenUrl": "https://picsum.photos/id/174/380/230",
+    "votos": 0,
+    "sincronizado": false
+  },
+  {
+    "id": 9,
+    "nombre": "hmmmw",
+    "imagenUrl": "https://picsum.photos/id/741/380/230",
+    "votos": 0,
+    "sincronizado": false
+  },
+  {
+    "id": 10,
+    "nombre": "felichita",
+    "imagenUrl": "https://picsum.photos/id/852/380/230",
+    "votos": 0,
+    "sincronizado": false
+  },
+  {
+    "id": 11,
+    "nombre": "captr",
+    "imagenUrl": "https://picsum.photos/id/856/380/230",
+    "votos": 0,
+    "sincronizado": false
+  },
+  {
+    "id": 12,
+    "nombre": "pedido",
+    "imagenUrl": "https://picsum.photos/id/154/380/230",
+    "votos": 0,
+    "sincronizado": false
   }
 ]
