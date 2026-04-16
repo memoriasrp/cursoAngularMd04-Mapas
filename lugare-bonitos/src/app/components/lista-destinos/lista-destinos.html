@@ -5,7 +5,7 @@
             <!--	form	card	login	with	validation	feedback	-->
             <div class="card	card-outline-secondary">
                 <div class="card-header">
-                    <h3 class="mb-0">Whishlist</h3>
+                    <h3 class="mb-0"><b [innerHTML]="'lista_deseos'| translate"></b></h3>
                 </div>
                 <div class="card-body">
                     <app-form-destino-viaje (onItemAdded)="agregado($event)"></app-form-destino-viaje>

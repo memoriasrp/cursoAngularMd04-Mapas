@@ -9,14 +9,12 @@ import { RESERVAS_API_CONFIG } from '../core/tokens/app-config.token'; // Config
 export class ReservasApiClient {
   // Inyección moderna en Angular 21
   private http = inject(HttpClient);
-  private readonly URL = 'https://tu-api.com/api/reservas';
 
   // Inyectamos el valor del token usando la función inject()
-  private config = inject(RESERVAS_API_CONFIG);
+  private config = inject<any>(RESERVAS_API_CONFIG);
 
   // Ejemplo: Método para obtener todas las reservas
   getAllReservas(): Observable<any[]> {
-    //return this.http.get(this.URL);
     // Usamos los datos del token
     console.log(`Conectando a: ${this.config.baseUrl} con timeout de ${this.config.timeout}ms`);
     // return this.http.get(`${this.config.baseUrl}/listado`);

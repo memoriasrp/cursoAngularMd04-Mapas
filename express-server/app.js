@@ -36,6 +36,44 @@ app.get('/api/paises', (req, res) => {
         res.status(500).json({ error: "No se pudo leer el archivo" });
     }
 });
+
+//app de translate
+/*
+    app.get('/api/translate/', (req, res, next) => res.json([
+    { lang: req.query.lang, key: 'hola', value: 'Hola' + req.query.lang }
+    ]));
+*/
+app.get('/api/translate/', (req, res) => {
+    // 1. Obtenemos el idioma o ponemos 'es' por defecto si viene vacío
+    const lang = req.query.lang || 'es';
+
+    // 2. Definimos todos los textos en un solo sitio
+    const traducciones = {
+        'en': {
+            'hola': 'Hi!',
+            'lista_deseos': 'Wishlist',
+            'destino_guardado': 'Destination saved'
+        },
+        'fr': {
+            'hola': 'Bonjour!',
+            'lista_deseos': 'Liste de souhaits',
+            'destino_guardado': 'Destination enregistrée'
+        },
+        'es': {
+            'hola': '¡Hola!',
+            'lista_deseos': 'Lista de deseos',
+            'destino_guardado': 'Destino guardado'
+        }
+    };
+
+    // 3. Buscamos el idioma solicitado. Si no existe (ej: mandan 'it'), devolvemos español.
+    const respuesta = traducciones[lang] || traducciones['es'];
+
+    console.log(`Enviando traducción para: [${lang}]`, respuesta);
+
+    // 4. Enviamos el objeto limpio
+    res.json(respuesta);
+});
 // 2. Guardar un nuevo destino
 app.post('/api/destinos', (req, res) => {
     try {

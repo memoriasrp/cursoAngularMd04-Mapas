@@ -8,9 +8,11 @@ import { AsyncPipe, CommonModule } from '@angular/common';
 import { FormDestinoViaje } from '../form-destino-viaje/form-destino-viaje';
 import { DestinoViaje } from '../destino-viaje/destino-viaje';
 import { DestinosApiClient, ClonDelApi } from '../../models/destinos-api-client.model';
+
+import { TranslateService, TranslateModule } from '@ngx-translate/core';
 @Component({
   selector: 'app-lista-destinos',
-  imports: [CommonModule, FormDestinoViaje, DestinoViaje, AsyncPipe],
+  imports: [CommonModule, FormDestinoViaje, DestinoViaje, AsyncPipe, TranslateModule],
   templateUrl: './lista-destinos.html',
   styleUrl: './lista-destinos.css',
 })

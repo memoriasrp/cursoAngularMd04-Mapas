@@ -74,10 +74,10 @@ export class DestinosApiClientLocalStorage extends DestinosApiClient {
     }
     override add(d: DestinoViajes) {
         super.add(d);
-
+        const idTemporal = Date.now();
         // 1. Crear el objeto con ID temporal y marca en false
         const objetoParaDexie = {
-            id: d.id || Date.now(),
+            id: idTemporal,
             nombre: d.nombre,
             imagenUrl: d.imagenUrl,
             votos: d.votos || 0,
