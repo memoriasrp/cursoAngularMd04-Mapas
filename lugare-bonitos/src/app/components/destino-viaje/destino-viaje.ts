@@ -5,7 +5,7 @@ import { Store } from '@ngrx/store';
 import { DestinoViajes } from '../../models/destino-viaje.model';
 
 import { DestinosApiClient } from '../../models/destinos-api-client.model';
-
+import { TrackearClick } from '../../trackear-click';
 import { trigger, transition, style, animate, query, stagger, state } from '@angular/animations';
 import {
   votarUp,
@@ -18,7 +18,7 @@ import {
 @Component({
   selector: 'app-destino-viaje',
   standalone: true,
-  imports: [RouterLink],
+  imports: [RouterLink, TrackearClick],
   templateUrl: './destino-viaje.html',
   styleUrl: './destino-viaje.css',
   animations: [

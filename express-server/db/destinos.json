@@ -17,7 +17,7 @@
     "id": 3,
     "nombre": "caramadunfga",
     "imagenUrl": "https://picsum.photos/id/652/380/230",
-    "votos": 0,
+    "votos": 2,
     "sincronizado": false
   },
   {
@@ -80,7 +80,7 @@
     "id": 12,
     "nombre": "pedido",
     "imagenUrl": "https://picsum.photos/id/154/380/230",
-    "votos": 0,
+    "votos": 2,
     "sincronizado": false
   },
   {
