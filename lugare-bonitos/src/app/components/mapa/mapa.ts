@@ -2,10 +2,11 @@ import { Component, OnInit, AfterViewInit, ElementRef, ViewChild } from '@angula
 import maplibregl from 'maplibre-gl'; // Importación directa y limpia
 import { trigger, transition, style, animate, query, stagger } from '@angular/animations';
 import { CommonModule } from '@angular/common';
+import { EspiameDirective } from '../../espiame';
 @Component({
   selector: 'app-mapa',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, EspiameDirective],
   templateUrl: './mapa.html',
   styleUrl: './mapa.css',
   animations: [

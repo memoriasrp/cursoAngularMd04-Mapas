@@ -1,6 +1,6 @@
 <div [@listaAnimada]="destinos.length" class="contenedor-destinos">
 
-    <div *ngFor="let d of destinos" class="tarjeta-destino">
+    <div *ngFor="let d of destinos" class="tarjeta-destino" appEspiame colorResaltado="lightblue">
         <h3>{{ d.nombre }}</h3>
     </div>
 

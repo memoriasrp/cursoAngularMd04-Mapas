@@ -82,5 +82,12 @@
     "imagenUrl": "https://picsum.photos/id/154/380/230",
     "votos": 0,
     "sincronizado": false
+  },
+  {
+    "id": 13,
+    "nombre": "calcular",
+    "imagenUrl": "https://picsum.photos/id/154/380/230",
+    "votos": 0,
+    "sincronizado": false
   }
 ]
