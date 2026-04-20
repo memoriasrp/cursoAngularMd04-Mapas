@@ -1,15 +1,42 @@
 import { Component, OnInit, AfterViewInit, ElementRef, ViewChild } from '@angular/core';
 import maplibregl from 'maplibre-gl'; // Importación directa y limpia
+import { trigger, transition, style, animate, query, stagger } from '@angular/animations';
+import { CommonModule } from '@angular/common';
 @Component({
   selector: 'app-mapa',
   standalone: true,
-  imports: [],
+  imports: [CommonModule],
   templateUrl: './mapa.html',
   styleUrl: './mapa.css',
+  animations: [
+    trigger('aparecerMapa', [
+      // :enter es un alias para 'void => *' (de no existir a existir)
+      transition(':enter', [
+        // Estado inicial: Invisible y 30px abajo
+        style({ opacity: 0, transform: 'translateY(30px)' }),
+        // Animación final: Duración de 600ms con suavizado
+        animate('600ms ease-out', style({ opacity: 12, transform: 'translateY(0)' }))
+      ])
+    ]),
+    trigger('listaAnimada', [
+      transition('* <=> *', [ // Cada vez que la lista cambie
+        query(':enter', [
+          // 1. Estado inicial: Fuera de la pantalla e invisible
+          style({ opacity: 0, transform: 'translateX(-50px)' }),
+
+          // 2. Aplicamos el Stagger: 100ms de retraso entre cada elemento
+          stagger('900ms', [
+            animate('100ms ease-out', style({ opacity: 1, transform: 'translateX(0)' }))
+          ])
+        ], { optional: true })
+      ])
+    ])
+  ]
 })
 export class Mapa implements AfterViewInit {
   // Obtenemos una referencia al DIV del HTML
   @ViewChild('mapContainer') mapContainer!: ElementRef;
+  destinos = [{ nombre: 'Cuzco' }, { nombre: 'Arequipa' }, { nombre: 'Lima' }];
 
   ngAfterViewInit() {
     // Inicializamos el mapa manualmente

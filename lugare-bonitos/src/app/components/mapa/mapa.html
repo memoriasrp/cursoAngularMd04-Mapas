@@ -1,3 +1,10 @@
-<div class="wrapper-mapa">
+<div [@listaAnimada]="destinos.length" class="contenedor-destinos">
+
+    <div *ngFor="let d of destinos" class="tarjeta-destino">
+        <h3>{{ d.nombre }}</h3>
+    </div>
+
+</div>
+<div class="wrapper-mapa" @aparecerMapa>
     <div #mapContainer class="map-render"></div>
 </div>

@@ -5,6 +5,8 @@ import { Store } from '@ngrx/store';
 import { DestinoViajes } from '../../models/destino-viaje.model';
 
 import { DestinosApiClient } from '../../models/destinos-api-client.model';
+
+import { trigger, transition, style, animate, query, stagger, state } from '@angular/animations';
 import {
   votarUp,
   votarDown,
@@ -19,6 +21,22 @@ import {
   imports: [RouterLink],
   templateUrl: './destino-viaje.html',
   styleUrl: './destino-viaje.css',
+  animations: [
+    trigger('esFavorito', [
+      state('estadoFavorito', style({
+        backgroundColor: 'PaleTurquoise',
+      })),
+      state('estadoNoFavorito', style({
+        backgroundColor: 'whiteSmoke',
+      })),
+      transition('estadoNoFavorito => estadoFavorito', [
+        animate('3s')
+      ]),
+      transition('estadoFavorito => estadoNoFavorito', [
+        animate('1s')
+      ])
+    ])
+  ]
 })
 export class DestinoViaje {
 

@@ -10,6 +10,11 @@ import { TRANSLATE_HTTP_LOADER_CONFIG } from '@ngx-translate/http-loader';
 import { DexieTranslateLoader } from './core/loaders/dexie-translate-loader';
 import { InjectionToken } from '@angular/core';
 export const MAPBOX_API_KEY = new InjectionToken<string>('mapbox.config.api.key');
+// Archivo: src/app/app.config.ts
+import { provideAnimations } from '@angular/platform-browser/animations';
+
+
+
 
 // Función para cargar las traducciones usando Dexie
 export function HttpLoaderFactory(http: HttpClient, apiConfig: any) {
@@ -25,7 +30,7 @@ export const appConfig: ApplicationConfig = {
     provideBrowserGlobalErrorListeners(),
     provideHttpClient(), // Uno solo es suficiente
     provideRouter(routes, withComponentInputBinding()),
-
+    provideAnimations(),
     // Configuración de la API
     {
       provide: RESERVAS_API_CONFIG,
