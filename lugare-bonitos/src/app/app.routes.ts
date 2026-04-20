@@ -8,7 +8,7 @@ import { VuelosMainComponent } from './components/vuelos/vuelos-main-component/v
 import { VuelosMasInfoComponent } from './components/vuelos/vuelos-mas-info-component/vuelos-mas-info-component';
 import { ReservasListado } from './components/reservas/reservas-listado/reservas-listado';
 import { ReservasDetalle } from './components/reservas/reservas-detalle/reservas-detalle';
-
+import { Mapa } from './components/mapa/mapa';
 import { usuarioLogueadoGuard } from './guards/usuario-logueado/usuario-logueado-guard';
 
 export const routes: Routes = [
@@ -23,7 +23,7 @@ export const routes: Routes = [
 
     // Ruta Protegida: Solo entran si el Guard devuelve true
     { path: 'destino', component: DestinoDetalle, canActivate: [usuarioLogueadoGuard] },
-
+    { path: 'mapa', component: Mapa, canActivate: [usuarioLogueadoGuard] },
     // Nueva ruta con hijos
     {
         path: 'vuelos',

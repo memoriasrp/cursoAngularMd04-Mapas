@@ -1,11 +1,9 @@
-import { Component, inject, signal } from '@angular/core';
+import { Component, inject, OnInit, signal } from '@angular/core';
 import { RouterOutlet, RouterLink, Router } from '@angular/router';
 import { AsyncPipe } from '@angular/common';
 import { Auth } from './services/auth'; // Ajusta la ruta a tu servicio
 import { interval, map } from 'rxjs';
 import { TranslateService, TranslateModule } from '@ngx-translate/core';
-
-
 
 @Component({
   selector: 'app-root',
@@ -13,7 +11,7 @@ import { TranslateService, TranslateModule } from '@ngx-translate/core';
   templateUrl: './app.html',
   styleUrl: './app.css'
 })
-export class App {
+export class App implements OnInit {
   constructor(public translate: TranslateService) {
     // Establecemos el idioma por defecto
     this.translate.setDefaultLang('es');
@@ -22,6 +20,9 @@ export class App {
       next: () => console.log('Traducciones cargadas desde la API'),
       error: (err) => console.error('Error al conectar con la API de traducción', err)
     });
+  }
+  ngOnInit(): void {
+
   }
   // Inyectamos el servicio como público
   public authService = inject(Auth);

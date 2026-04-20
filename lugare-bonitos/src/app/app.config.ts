@@ -1,45 +1,55 @@
-import { ApplicationConfig, provideBrowserGlobalErrorListeners, provideZoneChangeDetection, InjectionToken, importProvidersFrom } from '@angular/core';
+import { ApplicationConfig, provideBrowserGlobalErrorListeners, provideZoneChangeDetection, importProvidersFrom } from '@angular/core';
 import { provideRouter, withComponentInputBinding } from '@angular/router';
 import { provideHttpClient, HttpClient } from '@angular/common/http';
 import { RESERVAS_API_CONFIG } from './core/tokens/app-config.token';
 import { routes } from './app.routes';
 import { DestinosApiClientLocalStorage } from './models/DestinosApiClientLocalStorage';
 import { DestinosApiClient, ClonDelApi } from './models/destinos-api-client.model';
-import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
-
 import { TRANSLATE_HTTP_LOADER_CONFIG } from '@ngx-translate/http-loader';
 import { DexieTranslateLoader } from './core/loaders/dexie-translate-loader';
+import { InjectionToken } from '@angular/core';
+export const MAPBOX_API_KEY = new InjectionToken<string>('mapbox.config.api.key');
 
-// Función para cargar los archivos JSON
+// Función para cargar las traducciones usando Dexie
 export function HttpLoaderFactory(http: HttpClient, apiConfig: any) {
-  const baseUrl = apiConfig.baseUrl;
+  // Validación preventiva
+  const baseUrl = apiConfig?.baseUrl || 'http://localhost:3000/api';
   const urlTranslate = `${baseUrl}/translate/?lang=`;
-
   return new DexieTranslateLoader(http, urlTranslate);
 }
-export const appConfig: ApplicationConfig = {
 
+export const appConfig: ApplicationConfig = {
   providers: [
-    provideHttpClient(),
-    // Tip: En v21 se suele incluir provideZoneChangeDetection para mejor rendimiento
     provideZoneChangeDetection({ eventCoalescing: true }),
     provideBrowserGlobalErrorListeners(),
-    provideRouter(routes, withComponentInputBinding()),// 2. Activar el binding mágico
-    provideHttpClient(),
+    provideHttpClient(), // Uno solo es suficiente
+    provideRouter(routes, withComponentInputBinding()),
+
+    // Configuración de la API
     {
       provide: RESERVAS_API_CONFIG,
       useValue: { baseUrl: 'http://localhost:3000/api', timeout: 5000 }
     },
+
+    // Inyección de Servicios
+    {
+      provide: DestinosApiClient,
+      useClass: DestinosApiClientLocalStorage
+    },
+    {
+      provide: ClonDelApi,
+      useExisting: DestinosApiClient
+    },
+
+    // Configuración para MapLibre (vía ngx-mapbox-gl)
+    {
+      provide: MAPBOX_API_KEY,
+      useValue: '' // MapLibre no lo requiere
+    },
+
+    // Configuración de Traducción
     { provide: TRANSLATE_HTTP_LOADER_CONFIG, useValue: {} },
-    {
-      provide: DestinosApiClient,        // La base
-      useClass: DestinosApiClientLocalStorage // La mejora
-    },
-    {
-      provide: ClonDelApi,       // El nombre nuevo
-      useExisting: DestinosApiClient // El puente: usa el que ya existe
-    },
     importProvidersFrom(
       TranslateModule.forRoot({
         loader: {

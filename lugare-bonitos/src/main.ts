@@ -1,3 +1,7 @@
+// 1. Importación estática (Vite la entiende perfectamente)
+import maplibregl from 'maplibre-gl';
+// 2. Definimos la propiedad global antes de cualquier otra lógica
+(window as any).mapboxgl = maplibregl;
 import { bootstrapApplication } from '@angular/platform-browser';
 import { appConfig } from './app/app.config';
 import { App } from './app/app';
@@ -31,7 +35,7 @@ bootstrapApplication(App, {
     provideEffects([
       DestinosViajesEffects
     ]),
-     // NgRx DevTools 
+    // NgRx DevTools 
     provideStoreDevtools({
       maxAge: 25,
       logOnly: !isDevMode(),
