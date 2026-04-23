@@ -24,3 +24,31 @@
     /* Importante: evitar saltos bruscos durante la animación */
     will-change: transform, opacity;
 }
+
+/* Contenedor del popup */
+.maplibregl-popup {
+    max-width: 200px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* El contenido blanco interno */
+.maplibregl-popup-content {
+    border-radius: 12px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+    padding: 15px;
+}
+
+/* Personalizar el botón dentro del popup */
+.btn-reserva {
+    background-color: #627BC1;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 4px;
+    cursor: pointer;
+    width: 100%;
+}
+
+.btn-reserva:hover {
+    background-color: #4a5d91;
+}

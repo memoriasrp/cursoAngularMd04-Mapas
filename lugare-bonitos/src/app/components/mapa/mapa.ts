@@ -80,5 +80,24 @@ export class Mapa implements AfterViewInit {
 
     // Añadimos controles de navegación (opcional)
     map.addControl(new maplibregl.NavigationControl());
+    map.on('click', (e) => {
+      // e.lngLat contiene las coordenadas donde el usuario hizo clic
+      const { lng, lat } = e.lngLat;
+
+      // Creamos el Popup
+      new maplibregl.Popup({ offset: 25 }) // Desplazamiento para que no tape el cursor
+        .setLngLat([lng, lat])
+        .setHTML(`
+          <div style="padding: 10px;">
+            <h3 style="margin: 0; color: #627BC1;">¡Lugar Bonito!</h3>
+            <p>Coordenadas:</p>
+            <code>Lat: ${lat.toFixed(4)}<br>Lng: ${lng.toFixed(4)}</code>
+            <br><br>
+            <button class="btn-reserva">Reservar aquí</button>
+          </div>
+        `)
+        .addTo(map); // Lo añadimos al mapa
+    });
   }
+
 }
