@@ -1,0 +1,26 @@
+version: 2.1
+orbs:
+  cypress: cypress-io/cypress@3 # Usamos el "cerebro" de Cypress para CircleCI
+
+jobs:
+  build_and_unit_test:
+    docker:
+      - image: cimg/node:21.0-browsers # Imagen con Node 21 y navegadores instalados
+    steps:
+      - checkout
+      - run:
+          name: Instalar dependencias
+          command: npm install
+      - run:
+          name: Ejecutar Pruebas Unitarias (Jasmine)
+          command: npm run test -- --watch=false --browsers=ChromeHeadless
+
+workflows:
+  verificacion_completa:
+    jobs:
+      - build_and_unit_test
+      - cypress/run: # Corre Cypress automáticamente
+          requires:
+            - build_and_unit_test # Solo corre Cypress si Jasmine pasó
+          start-command: npm start # Comando para encender tu app
+          wait-on: "http://localhost:4200" # Espera a que la app esté lista
